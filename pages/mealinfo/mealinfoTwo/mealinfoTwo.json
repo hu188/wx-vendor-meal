@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "套餐详情",
+
+  "usingComponents": {
+    "i-icon": "../../../components/icon/index",
+  "i-toast": "../../../components/toast/index"
+  }
+}

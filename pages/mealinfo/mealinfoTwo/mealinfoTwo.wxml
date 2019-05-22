@@ -1,0 +1,65 @@
+<wxs module="price" src="../../../utils/common.wxs" />
+<wxs module="utils" src="../../../utils/index.wxs" />
+<scroll-view scroll-y>
+ <view class="i-card">
+      <view class="i-card-header">
+        <image class="i-card-img" src="../../images/fruits.jpg" mode="aspectFit" />
+        <view style='color:#B63B41;font-weight:600;font-size:18px;'>￥{{price.price(mealPrice)}}元</view>
+        
+      </view>
+      <view class="i-card-body">{{mealName}}</view>
+      <view class="i-card-footer">{{extendMsg}}</view>
+    </view>
+
+
+
+  <view class='cons-empty'> </view>
+  <view style='margin:10px;'>
+    <radio-group bindchange="bindPaymentChange">
+      <view class="payWay">
+        <view style='display:flex; align-items: center;'>
+          <i-icon type="transaction_fill" size="20" color="#80848f" />
+          <text style='font-size:15px;'>微信支付</text>
+        </view>
+        <radio value="{{0}}" checked="{{item.checked}}" checked='{{true}}' />
+      </view>
+      <view class="payWay">
+        <view style='display:flex; align-items: center;'>
+          <i-icon type="financial_fill" size="20" color="#80848f" />
+          <text style='font-size:15px;'>余额支付</text>
+          <text class="balance">(账户余额:{{price.price(balance)}})</text>
+        </view>
+        <radio value="{{1}}" checked="{{item.checked}}" />
+      </view>
+    </radio-group>
+  </view>
+
+    <view class='group-explain'>
+    <view class="group-warn">温馨提示：</view>
+    <view>
+      <text class='group-explain-text'>1</text> 选择商品享受优惠价格
+    </view>
+    <view>
+      <text class='group-explain-text' >2</text> 每天最多可取两个商品！
+    </view>
+    <view>
+      <text class='group-explain-text' >3</text> 购买套餐后可任意提取售货机上的商品
+    </view>
+    
+    <view>
+      <text class='group-explain-text'>4</text> 支付成功后，您可以随时去附近自助设备取货
+    </view>
+
+  </view>
+</scroll-view>
+
+<view class='cart-show-submit'>
+  <view class='cart-showtotal'>
+    应付金额：
+    <view>
+      ￥{{price.price(mealPrice)}}
+    </view>
+  </view>
+  <view class="cart-submit" bindtap='toBuyMeal'>购买</view>
+</view>
+<i-toast id="toast" />

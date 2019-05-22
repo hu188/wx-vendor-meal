@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/goods/index",
+    "pages/rechargeVip/index",
+    "pages/submitOrder/index",
+    "pages/coupon/index",
+    "pages/mycenter/index",
+    "pages/mycoupon/index",
+    "pages/order/index",
+    "pages/orderDetail/index",
+    "pages/balance/index",
+    "pages/recharge/index",
+    "pages/meals/index",
+    "pages/mealinfo/mealinfo",
+    "pages/mealinfo/mealinfoTwo/mealinfoTwo",
+    "pages/mealRepertory/mealRepertory",
+    "pages/order/pickUpRecord/index",
+    "pages/order/mealOrder/index"
+  ],
+  "window": {
+    "defaultTitle": "天任售货机平台",
+    "titleBarColor": "#0289d1",
+    "backgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/goods/index"
+      },
+      {
+        "pagePath": "pages/meals/index"
+      },
+      {
+        "pagePath": "pages/mealRepertory/mealRepertory"
+      },
+      {
+        "pagePath": "pages/mycenter/index"
+      }
+    ]
+  }
+}

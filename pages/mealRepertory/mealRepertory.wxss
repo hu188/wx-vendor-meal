@@ -1,0 +1,181 @@
+/* pages/mealRepertory/mealRepertory.wxss */
+.js-tips {
+  font-size: 16px;
+  padding: 15px 15px 5px 15px;
+  color: #555;
+font-weight: 700
+}
+
+
+.js-tips-txt {
+  font-size: 14px;
+  padding: 0px 15px;
+  color: #555;
+  text-indent: 2em;
+}
+.js-tips text{
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.js-view-mode{
+  padding: 0 5px;
+  border-top: 5px solid #f0f0f0;
+}
+
+.core {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 95vw;
+  height: 220px;
+  padding-top: 35px;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.core-scroll {
+  width: auto;
+  height: 80vh;
+  text-align: center;
+}
+
+.core-scroll-item {
+  width: 160px;
+  border: 1px solid #eee;
+  background: #f0f0f0;
+  border-radius: 5px;
+  height: 200px;
+  margin: 0 5px;
+  display: inline-block;
+  color: #673A1B;
+  position: relative;
+  overflow: hidden;
+}
+
+.core-scroll-end {
+  display: inline-block;
+  width: 100px;
+}
+
+
+.selected-icon {
+  font-size: 12px;
+  background: #FF3B30;
+  height: 20px;
+  width: 80px;
+  color: #fff;
+  line-height: 20px;
+  transform: rotate(320deg);
+  position: absolute;
+  top: 0;
+  left: -25px;
+  padding-right: 15px;
+  text-align: center;
+}
+
+.selected {
+  background: #333;
+  position: relative;
+  /* box-shadow:#fff 0px 0px -15px; */
+  border: 1px solid #ddd;
+  color: #fff;
+}
+
+.goods-title {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.goods-img {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.goods-img image {
+  width: 120px;
+  height: 120px;
+}
+
+.goods-num {
+  text-align: center;
+  color: #888;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.opt-area {
+  position: fixed;
+  right: 0;
+  bottom: 62px;
+  display: flex;
+}
+
+.opt{
+  color: #fff;
+  background: #444;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 25px;
+  width: 100px;
+  margin: auto;
+  margin-right: 8px;
+}
+
+.opt-send {
+  background: #555;
+}
+.opt-pick {
+  background: #777;
+  width: 120px;
+}
+
+.small-tips {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+
+}
+
+.small-tips text {
+  font-weight: bold;
+  color: #333;
+}
+.no-order{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.group-explain {
+  border-top: 1px solid #f5f5f5;
+  font-size: 12px;
+  padding: 10px;
+  color: #333;
+  /* background: #bbb; */
+}
+
+.group-explain view {
+  margin-bottom: 2px; 
+  padding-left: 10px;
+}
+
+.group-explain-text {
+  display: inline-block;
+  background: #999;
+  color: #fff;
+  width: 15px;
+  height: 15px;
+  font-size: 10px;
+  line-height: 15px;
+  text-align: center;
+  border-radius: 50%;
+  margin-right: 5px;
+}

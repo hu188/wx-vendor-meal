@@ -1,0 +1,68 @@
+<wxs module="price" src="../../utils/common.wxs" />
+<wxs module="utils" src="../../utils/index.wxs" />
+<scroll-view scroll-y>
+  <swiper autoplay="true" interval="8000" duration="300" indicator-dots="true" indicator-color="#555" indicator-active-color="#fff" circular="true" class="swiper-img">
+    <block>
+      <swiper-item>
+        <image src="{{utils.convertImagePath(mealInfo.id)}}" style="width:100%;height:100%;" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+
+  <view class='group-info'>
+    <view class='tips-user-num'>{{mealName}}</view>
+    <view class='group-name'>{{mealInfo.commodityName}}（{{mealInfo.commodityNumber}}个）</view>
+  </view>
+
+  <view class='group-price'>
+    <view class='tips-discounts'>￥{{price.price(mealPrice)}}</view>
+    <view class='tips-practical'>￥{{price.price(mealInfo.retailPrice)}}/份</view>
+  </view>
+
+  <view class='group-explain'>
+    <view>
+      <text class='group-explain-text'>1</text> 选择商品享受优惠价格
+    </view>
+    <view>
+      <text class='group-explain-text'>2</text> 该套餐包含
+      <txt style="color:#f00;font-weight:800">{{mealInfo.commodityNumber}}份{{mealInfo.commodityName}}</txt>
+    </view>
+    <view>
+      <text class='group-explain-text'>3</text> 支付成功后，商品将存入商品库，您可以随时去附近自助设备取货
+    </view>
+
+  </view>
+
+  <view class='cons-empty'> </view>
+  <view style='margin:10px;'>
+    <radio-group bindchange="bindPaymentChange">
+      <view class="payWay">
+        <view style='display:flex; align-items: center;'>
+          <i-icon type="transaction_fill" size="20" color="#80848f" />
+          <text style='font-size:15px;'>微信支付</text>
+        </view>
+        <radio value="{{0}}" checked="{{item.checked}}" checked='{{true}}' />
+      </view>
+      <view class="payWay">
+        <view style='display:flex; align-items: center;'>
+          <i-icon type="financial_fill" size="20" color="#80848f" />
+          <text style='font-size:15px;'>余额支付</text>
+          <text class="balance">(账户余额:{{price.price(balance)}})</text>
+        </view>
+        <radio value="{{1}}" checked="{{item.checked}}" />
+      </view>
+    </radio-group>
+  </view>
+</scroll-view>
+
+<view class='cart-show-submit'>
+  <view class='cart-showtotal'>
+    应付金额：
+    <view>
+      ￥{{price.price(mealPrice)}}
+    </view>
+  </view>
+  <view class="cart-submit" bindtap='toBuyMeal'>购买</view>
+</view>
+<i-toast id="toast" />

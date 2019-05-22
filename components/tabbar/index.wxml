@@ -1,0 +1,8 @@
+<i-tab-bar current="{{ current }}" color="#f759ab" fixed style='width:100%' bindchange="handleChange">
+    <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="首页"></i-tab-bar-item>
+       <i-tab-bar-item key="meals" icon="task" current-icon="task_fill" title="套餐"></i-tab-bar-item>
+
+    <i-tab-bar-item wx:if="{{mealType==0}}" key="repertory" icon="shop_fill" current-icon="shop_fill" title="商品库"></i-tab-bar-item>
+  
+    <i-tab-bar-item key="mine" icon="mine" current-icon="mine_fill" title="我的"></i-tab-bar-item>
+  </i-tab-bar>

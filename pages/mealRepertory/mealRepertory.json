@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "商品库",
+  "usingComponents": {
+      "i-message": "../../components/message/index",
+      "i-icon": "../../components/icon/index",
+      "i-toast": "../../components/toast/index",
+      "i-tab": "../../components/tabbar/index"
+  }
+}

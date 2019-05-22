@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "我的",
+  "usingComponents":{
+    "i-tab": "../../components/tabbar/index",
+    "i-cell-group": "../../components/cell-group/index",
+    "i-cell": "../../components/cell/index",
+    "i-icon": "../../components/icon/index"
+  }
+}

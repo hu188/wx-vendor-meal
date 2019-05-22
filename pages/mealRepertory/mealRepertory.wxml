@@ -1,0 +1,76 @@
+<wxs module="utils" src="../../utils/index.wxs" />
+<block wx:if="{{goodsArr.length > 0}}">
+  <view class='js-view-mode'>
+    <view >
+      <text class="js-tips">温馨提示：</text> 
+      <!-- <view class='js-tips-txt'>向右（横向）滑动，选择套餐，点击取货。取货前先查看设备上是否有此商品，每天最多可使用两次！(避免取货失败，)</view>-->
+      <view class='group-explain '>
+    <view>
+      <text class='group-explain-text'>1</text> 向右（横向）滑动，选择套餐，点击取货。
+    </view>
+    <view>
+      <text class='group-explain-text'>2</text> 取货前先查看设备上是否有此商品。
+      <txt style="color:#f00;font-weight:800"></txt>
+    </view>
+    <view>
+      <text class='group-explain-text'>3</text> 每天最多可取货2次！
+    </view>
+    <view>
+      <text class='group-explain-text'>4</text> 避免取货失败，取货后等待10秒可再次取货。
+    </view>
+  </view>
+    </view> 
+    
+  </view>
+
+  <view class='core'>
+    <scroll-view class="core-scroll" scroll-x  
+      bindscroll="toBindScroll"
+      scroll-into-view="{{scrollId}}" >
+      <block wx:if="{{goodsArr.length > 1}}">
+        <view id="item_start" class='core-scroll-end'></view>
+      </block>
+      <block wx:for="{{goodsArr}}" wx:key="goods">
+        <view id="item_{{index}}" 
+          class="core-scroll-item {{checkedItem == index ? 'selected' : ''}}" 
+          data-index='{{item.index}}' bindtap='clickItemOpt'
+          data-index='{{index}}'>
+          <view class='goods-img'>
+            <image src="{{utils.convertImagePath(item.pictureId)}}" />
+          </view>
+          <view class='goods-title'>
+            {{item.content}} 
+          </view>
+          <view class='goods-num'>
+            还剩{{item.mealGoodNum}}份
+          </view>
+          <view hidden="{{checkedItem == index ? false: true}}" 
+            class='selected-icon'>
+            选中
+          </view>
+        </view>
+      </block>
+      <block wx:if="{{goodsArr.length > 1}}">
+        <view id="item_end" class='core-scroll-end'></view>
+      </block>
+    </scroll-view>
+  </view>
+
+  <view class='small-tips'>
+    共有{{totalNum}}份套餐，当前位置<text>{{checkedItem+1}}/{{goodsArr.length}}</text>
+  </view>
+
+  <view class='opt-area'>
+     <button class='opt opt-pick' bindtap="toSendGoods" disabled="{{disabled}}">取货</button> 
+  </view>
+</block>
+
+<block wx:else>
+  <view class="no-order">
+    <i-icon type="emoji" size='85'/>
+    <view>您还没有购买套餐哟</view>
+  </view>
+</block>
+<i-tab current='repertory'></i-tab>
+<i-toast id="toast" />
+<i-message id="message" />
