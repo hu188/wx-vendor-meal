@@ -4,16 +4,20 @@
     overflow: hidden;
     background-color: #fff;
 }
+.tssm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .p{
   width: 200px;
   height: 200px; 
-  padding-top: 100px;
+  margin-top: 100px;
 }
 .txt{
   width: 200px;
   height: 150px;
-  position: fixed;
-  align-items: center;
+
   font-size:20px;
 }
 .search{
@@ -145,11 +149,11 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    height: 94.5vh;
+    height: 94vh;
 }
 .sub-left{
     width: 23%;
-    height: 90%;
+    height: 82%;
 }
 .sub-left .ul-left view{
     height: 60px;
@@ -163,9 +167,9 @@
 }
 .sub-right{
     width: 75%;
-    height: 90%;
+    height: 82%;
     background: #fff;
-    margin-top:5px;
+    /* margin-top:5px; */
 }
 .sub-right .title{
     width: 100%;

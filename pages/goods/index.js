@@ -33,7 +33,7 @@ Page({
     sign:'',
     num:'',//货存
     tp:'',//0单货单，1多货道,
-   
+    mealUseNum:0,//套餐剩余使用数量
   },
   onLoad(options) {
     wx.hideTabBar()
@@ -65,7 +65,7 @@ Page({
       tp为1多货道，tp为0单货道
       meal为1套餐是购买次数，为0套餐是固定的商品
     */
-    //BmcKLAeVhAeVhAc BmcKLBoLBoLBpBq
+    //BmcKLAeVhAeVhAc BmcKLBoLBoLBpBq AbVeVgVfAfVHAfVgdhViAcchVh
     var url = 'https://www.tianrenyun.com/qsq/paomian/?sign=BmcKLAeVhAeVhAc&type=2&appid=13&tp=1&meal=1'
    //var url = 'https://www.tianrenyun.com/qsq/paomian/?sign=&type=1&appid=12&tp=&meal=1'
    
@@ -128,7 +128,8 @@ Page({
               }
               http('qsq/miniService/miniProComm/weChatCommon/saveAnalysisData', JSON.stringify(params), 1, 1).then(sres => {
              //根据设备名查找设备
-              this.queryDevice(this.data.sign)
+              this.queryDevice(this.data.sign);
+                this.queryMealUseNum();
               })
   
             })
@@ -451,9 +452,27 @@ Page({
       });
      
   },
-
+  //查询套餐剩余使用次数
+  queryMealUseNum() {
+    var that = this;
+    const params = {
+      sign: encode({
+        userId: app.globalData.userId
+      }, app.globalData.sessionId),
+      sessionId: app.globalData.sessionId,
+      params: {
+        userId: app.globalData.userId
+      }
+    }
+    http('qsq/service/external/goods/queryMealUseNum', params, 1, 1).then(res => {
+      that.setData({
+        mealUseNum: res
+      })
+    })
+  },
   onShow (){
     if (app.globalData.userId){
+      this.queryMealUseNum();
       const params = {
         sign: encode({
           userId: app.globalData.userId

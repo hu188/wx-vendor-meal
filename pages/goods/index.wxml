@@ -1,7 +1,17 @@
 <wxs module="utils" src="./index.wxs" />
 <wxs module="price" src="../../utils/common.wxs" />
-<view class="container container1">
 
+<view class="container container1">
+<view wx:if="{{mealUseNum>0}}">
+<i-notice-bar icon="systemprompt" loop speed="2000">
+      我的套餐剩余使用次数：{{mealUseNum}}次，每天可以提取两个商品
+</i-notice-bar>
+</view>
+ <view wx:else>
+    <i-notice-bar icon="systemprompt" loop speed="2000">
+      温馨提示：您可以购买优惠套餐，每日可以提取两个商品
+    </i-notice-bar>
+  </view>
   <view wx:if="{{sign}}" class="subclass">
     <scroll-view scroll-y="false" class="sub-left">
       <view class="ul-left">
@@ -77,7 +87,7 @@
       </view>
     </scroll-view>
   </view>
-  <view wx:else>
+  <view wx:else class="tssm">
     <image src='../images/scancode.jpg' class='p' bindtap="click"></image>
     <text class='txt'>扫码进入小程序</text>
   </view>
