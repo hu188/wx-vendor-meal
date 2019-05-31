@@ -4,12 +4,12 @@
 <view class="container container1">
 <view wx:if="{{mealUseNum>0}}">
 <i-notice-bar icon="systemprompt" loop speed="2000">
-      我的套餐剩余使用次数：{{mealUseNum}}次，每天可以提取两个商品
+      我的套餐剩余使用次数：{{mealUseNum}}次，每天可以提取两个商品。客服热线：4000009443
 </i-notice-bar>
 </view>
  <view wx:else>
     <i-notice-bar icon="systemprompt" loop speed="2000">
-      温馨提示：您可以购买优惠套餐，每日可以提取两个商品
+      温馨提示：您可以购买优惠套餐，每日可以提取两个商品。客服热线：4000009443
     </i-notice-bar>
   </view>
   <view wx:if="{{sign}}" class="subclass">

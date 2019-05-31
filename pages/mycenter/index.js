@@ -38,6 +38,11 @@ Page({
       url: '../order/mealOrder/index',
     })
   },
+  call(){
+    wx.makePhoneCall({
+      phoneNumber: '4000009443' 
+    })
+  },
   onShow: function () {
     
   }

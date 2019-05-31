@@ -249,8 +249,9 @@ Page({
         var goods = res[0].goodsRoad1;
      
         var goodsRoadColumns="["+goodsRoadColumn+"]";
+     
         var goodsRoadColumnsJson = JSON.parse(goodsRoadColumns)
-        
+
         for (var i = 0; i < goodsRoadColumnsJson.length;i++){
           this.data[goodsRoadColumnsJson[i].value] = goodsRoadColumnsJson[i].columnName;
         }

@@ -97,16 +97,16 @@
         </view>
       </navigator>
 
-      <button open-type='concat' class='concat'>
+      <button bindtap='call' class='concat'>
         <view class="div_div1 orderList">
           <view class="tab_div">
             <view class="ico1">
               <!-- <image src="../images/xun1-active.png"></image> <i-icon type="customerservice" />-->
               <i-icon type="customerservice" size="24" color="#63B8FF" style='margin-right:10px;'/>
-              <view class="tab_span">客服</view>
+              <view class="tab_span">客服热线</view>
             </view>
             <view class="ico2">
-              <image src="http://mshop.yiyao365.cn/theme/default/images/wap/icon-05.png"></image>
+            <view class="tab_span"> 4000009443</view>
             </view>
           </view>
           <view class="divclear5"></view>
