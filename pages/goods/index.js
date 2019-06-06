@@ -34,9 +34,23 @@ Page({
     num:'',//货存
     tp:'',//0单货单，1多货道,
     mealUseNum:0,//套餐剩余使用数量
+    showCart:false,
   },
   onLoad(options) {
     wx.hideTabBar()
+    /*
+   type为1正式版，type为2本地测试 
+   tp为1多货道，tp为0单货道
+   meal为1套餐是购买次数，为0套餐是固定的商品
+ */
+    //BmcKLAeVhAeVhAc BmcKLBoLBoLBpBq AbVeVgVfAfVHAfVgdhViAcchVh
+    //var url = 'https://www.tianrenyun.com/qsq/paomian/?sign=BmcKLAeVhAeVhAc&type=2&appid=13&tp=1&meal=1'
+    var url = 'https://www.tianrenyun.com/qsq/paomian/?sign=&type=1&appid=12&tp=&meal=1'
+
+    if (options.q) {
+      url = decodeURIComponent(options.q);
+    }
+    this.decodeUrl(url)
     //判断是否授权
     var _this = this;
     wx.getSetting({
@@ -50,6 +64,7 @@ Page({
                 hasUserInfo: true,
                 userNick: resSetting.userInfo.nickName
               });
+              _this.login()
             }
           });
         } else {
@@ -60,20 +75,8 @@ Page({
         }
       }
     });
-    /*
-      type为1正式版，type为2本地测试 
-      tp为1多货道，tp为0单货道
-      meal为1套餐是购买次数，为0套餐是固定的商品
-    */
-    //BmcKLAeVhAeVhAc BmcKLBoLBoLBpBq AbVeVgVfAfVHAfVgdhViAcchVh
-    var url = 'https://www.tianrenyun.com/qsq/paomian/?sign=BmcKLAeVhAeVhAc&type=2&appid=13&tp=1&meal=1'
-   //var url = 'https://www.tianrenyun.com/qsq/paomian/?sign=&type=1&appid=12&tp=&meal=1'
-   
-    if (options.q) {
-      url = decodeURIComponent(options.q);
-    }
-    this.decodeUrl(url)
-    this.login()
+ 
+    
   },
 
   login() {
@@ -111,7 +114,7 @@ Page({
                   isFirstBuy: app.globalData.isFirstBuy,
                 })
               }
-              wx.clearStorageSync()
+              // wx.clearStorageSync()
   
               const params = {
                 sign: encode({
@@ -129,7 +132,7 @@ Page({
               http('qsq/miniService/miniProComm/weChatCommon/saveAnalysisData', JSON.stringify(params), 1, 1).then(sres => {
              //根据设备名查找设备
               this.queryDevice(this.data.sign);
-                this.queryMealUseNum();
+              this.queryMealUseNum();
               })
   
             })
@@ -319,17 +322,27 @@ Page({
             goodsType: this.data.goodRoads.slice(0, end)
           })
           const aaa = arr.filter(item => item.typeName === this.data.selectType);
-          const hcList = wx.getStorageSync('list' + this.data.selectType);
-          if (hcList.length > 0) {
-            this.setData({
-              list: hcList
+          let selectGoods = this.data.selectGoods//购物车商品
+
+          for (var k = 0; k < selectGoods.length;k++){
+            aaa.find((item) => {
+              if (item.goodId == selectGoods[k].goodId) {
+                item.count = selectGoods[k].count
+              }
             })
-          }else{
+          }
+        
+          // const hcList = wx.getStorageSync('list' + this.data.selectType);
+          // if (hcList.length > 0) {
+          //   this.setData({
+          //     list: hcList
+          //   })
+          // }else{
             this.setData({
               list: aaa,
               s: this.data.s,
             })
-          }
+          // }
         //不存在序号，一层显示
         }else{
           this.setData({
@@ -393,9 +406,10 @@ Page({
       } else {
         count--
       }
+
       goods['count'] = value
       goods['coupons'] = item
-      const s = glist.filter(item => item.id != goods.id);
+    const s = glist.filter(item => item.goodId != goods.goodId);
       s.push(goods);
       this.setData({
         glist: s
@@ -406,7 +420,6 @@ Page({
         
         if (couponType * 1 === 5) {
           goods['discount'] = (goods.count * goods.retailPrice - goods.count * goods.retailPrice * coupons.discount * 0.01).toFixed(2)
-          console.log(goods['discount'])
         } else if (couponType * 1 === 6) {
           goods['discount'] = coupons.discount
         } else if (couponType * 1 === 7) {
@@ -447,11 +460,78 @@ Page({
         selectGoods: selectGoods
       })
       
-      wx.setStorage({
-        key: 'list' + this.data.selectType, // 缓存数据的key
-        data: list // 要缓存的数据
-      });
+      // wx.setStorage({
+      //   key: 'list' + this.data.selectType, // 缓存数据的key
+      //   data: list // 要缓存的数据
+      // });
      
+  },
+
+  addNumber: function ({ detail, target }) {
+    const { index } = target.dataset //商品下标
+    const { value, type } = detail //数量 按钮类型
+    let { list, count, total,selectGoods } = this.data
+    if (type === 'plus') {
+      count++ 
+    } else {
+      if (count > 0) {
+        count-- 
+      }
+    }
+    let curGood = selectGoods[index];
+    curGood.count = value
+    let totalPrice = selectGoods.reduce((total, cur) => {
+      if (cur.count * cur.retailPrice - cur.discount > 0) {
+        if (app.globalData.isVip == 1 && app.globalData.isFirstBuy == 1) {
+          return cur.count * cur.costPrice - cur.discount + total
+        }
+        return cur.count * cur.retailPrice - cur.discount + total
+      } else {
+        return 0.01 + total
+      }
+
+    }, 0)
+    let num = selectGoods.reduce((total, cur) => {
+      return cur.count + total
+    }, 0)
+    list.find((item) => {
+      if (item.goodId == selectGoods[index].goodId) {
+        item.count = selectGoods[index].count
+        console.log(item)
+      }
+    })
+    selectGoods = selectGoods.filter(item => item.count && item.count > 0)
+    getApp().globalData.goodsList = selectGoods
+    if (count == 0) {
+      this.setData({
+        showCart: false
+      })
+    }
+    this.setData({
+      selectGoods: selectGoods,
+      total: totalPrice,
+      count: num,
+      list: list
+    });
+    // wx.setStorage({
+    //   key: 'list' + this.data.selectType, // 缓存数据的key
+    //   data: list // 要缓存的数据
+    // });
+  },
+  clearCartList(){
+    let { list, selectGoods } = this.data
+    list.find((item) => {
+        item.count = 0
+    })
+    this.setData({
+      selectGoods: [],
+      glist:[],
+      showCart: false,
+      total: 0,
+      count: 0,
+      list: list
+    });
+    app.globalData.goodsList = []
   },
   //查询套餐剩余使用次数
   queryMealUseNum() {
@@ -470,6 +550,15 @@ Page({
         mealUseNum: res
       })
     })
+  },
+  //显示购物车
+  showCartList: function () {
+    if (this.data.selectGoods.length != 0) {
+      this.setData({
+        showCart: !this.data.showCart,
+      });
+    }
+
   },
   onShow (){
     if (app.globalData.userId){
@@ -507,6 +596,8 @@ Page({
             discount: 0,
             count: 0,
             list: list,
+            selectGoods:[],
+            glist:[]
           })
           if (this.data.deviceId) {
             this.queryGoods(this.data.deviceId, this.data.selectType)

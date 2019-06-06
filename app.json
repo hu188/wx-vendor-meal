@@ -18,8 +18,6 @@
     "pages/order/mealOrder/index"
   ],
   "window": {
-    "defaultTitle": "天任售货机平台",
-    "titleBarColor": "#0289d1",
     "backgroundColor": "#ffffff"
   },
   "tabBar": {
@@ -37,5 +35,6 @@
         "pagePath": "pages/mycenter/index"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

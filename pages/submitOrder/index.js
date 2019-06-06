@@ -203,76 +203,12 @@ Page({
                         });
                       }else{
                         this.createOneRoadOrder()
-                        // const params = {
-                        //   sign: encode({
-                        //     deviceId: app.globalData.deviceId,
-                        //     userId: app.globalData.userId,
-                        //     goodId: this.data.goodId,
-                        //     goodName: this.data.goodsList[0].commodityName,
-                        //     money: 0,
-                        //     payType: 11,
-                        //     num: this.data.goodsList.length,
-                        //     nickname: app.globalData.nickname,
-                        //     isVip: this.data.isVip,
-                        //     isFirstBuy: this.data.isFirstBuy
-                        //   }, app.globalData.sessionId),
-                        //   sessionId: app.globalData.sessionId,
-                        //   params: {
-                        //     deviceId: app.globalData.deviceId,
-                        //     userId: app.globalData.userId,
-                        //     goodId: this.data.goodId,
-                        //     goodName: this.data.goodsList[0].commodityName,
-                        //     money: 0,
-                        //     payType: 11,
-                        //     num: this.data.goodsList.length,
-                        //     nickname: app.globalData.nickname,
-                        //     isVip: this.data.isVip,
-                        //     isFirstBuy: this.data.isFirstBuy
-                        //   }
-                        // }
-                        // http('qsq/service/external/order/saveOrderInfo', JSON.stringify(params), 1, 1).then(res => {
-                        //   this.setData({
-                        //     order: res
-                        //   })
-                        //   this.pay(res.orderNo)
-                        // })
+             
                       }
                     })
                 }else{
                   this.createOneRoadOrder()
-                  // const params = {
-                  //   sign: encode({
-                  //     deviceId: app.globalData.deviceId,
-                  //     userId: app.globalData.userId,
-                  //     goodId: this.data.goodId,
-                  //     goodName: this.data.goodsList[0].commodityName,
-                  //     money: this.data.realPrice,
-                  //     payType: this.data.payType,
-                  //     num: this.data.goodsList.length,
-                  //     nickname: app.globalData.nickname,
-                  //     isVip: this.data.isVip,
-                  //     isFirstBuy: this.data.isFirstBuy
-                  //   }, app.globalData.sessionId),
-                  //   sessionId: app.globalData.sessionId,
-                  //   params: {
-                  //     deviceId: app.globalData.deviceId,
-                  //     userId: app.globalData.userId,
-                  //     goodId: this.data.goodId,
-                  //     goodName: this.data.goodsList[0].commodityName,
-                  //     money: this.data.realPrice,
-                  //     payType: this.data.payType,
-                  //     num: this.data.goodsList.length,
-                  //     nickname: app.globalData.nickname,
-                  //     isVip: this.data.isVip,
-                  //     isFirstBuy: this.data.isFirstBuy
-                  //   }
-                  // }
-                  // http('qsq/service/external/order/saveOrderInfo', JSON.stringify(params), 1, 1).then(res => {
-                  //   this.setData({
-                  //     order: res
-                  //   })
-                  //   this.pay(res.orderNo)
-                  // })
+               
                 }
               } else {
                 $Message({
@@ -338,35 +274,7 @@ Page({
                 } else {
                 //多货道创建预支付订单
                   this.createManyRoadOrder(goodsList)
-                // const params = {
-                //   sign: encode({
-                //     goodsList: JSON.stringify(goodsList),
-                //     deviceId: app.globalData.deviceId,
-                //     userId: app.globalData.userId,
-                //     payType: this.data.payType,
-                //     nickname: app.globalData.nickname,
-                //     isVip: this.data.isVip,
-                //     isFirstBuy: this.data.isFirstBuy,
-                //     tp: app.globalData.tp
-                //   }, app.globalData.sessionId),
-                //   sessionId: app.globalData.sessionId,
-                //   params: {
-                //     goodsList: JSON.stringify(goodsList),
-                //     deviceId: app.globalData.deviceId,
-                //     userId: app.globalData.userId,
-                //     payType: this.data.payType,
-                //     nickname: app.globalData.nickname,
-                //     isVip: this.data.isVip,
-                //     isFirstBuy: this.data.isFirstBuy,
-                //     tp: app.globalData.tp
-                //   }
-                // }
-                // http('qsq/service/external/order/saveOrderInfo', JSON.stringify(params), 1, 1).then(res => {
-                //   this.setData({
-                //     order: res
-                //   })
-                //   this.pay(res.extendMsg)
-                // })
+            
                 }
               } else {
                 $Message({
@@ -534,7 +442,7 @@ createOneRoadOrder(){
               money: this.data.totalPrice * 100,
               send: 0
             }, 1).then(res => {})
-            wx.clearStorageSync();
+         //   wx.clearStorageSync();
             wx.navigateBack({
               delta: 1
             })
@@ -592,7 +500,7 @@ createOneRoadOrder(){
                 content: '支付成功',
                 type: 'success'
               });
-              wx.clearStorageSync();
+           //   wx.clearStorageSync();
               app.globalData.goodsList = []
               wx.navigateBack({
                 delta: 1
@@ -617,7 +525,7 @@ createOneRoadOrder(){
               type: 'success'
             });
             app.globalData.goodsList = []
-            wx.clearStorageSync();
+          //  wx.clearStorageSync();
             wx.navigateBack({
               delta: 1
             })
