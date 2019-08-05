@@ -467,7 +467,8 @@ createOneRoadOrder(){
           orderNo,
           type: 1,
           tp: app.globalData.tp,
-          appid: app.globalData.id
+          appid: app.globalData.id,
+          notifyUrl: 'NOTIFYURL_1',
         }, app.globalData.sessionId),
         sessionId: app.globalData.sessionId,
         params: {
@@ -475,7 +476,8 @@ createOneRoadOrder(){
           orderNo,
           type: 1,
           tp: app.globalData.tp,
-          appid: app.globalData.id
+          appid: app.globalData.id,
+          notifyUrl: 'NOTIFYURL_1',
         }
       }
       //微信支付

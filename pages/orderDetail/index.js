@@ -211,7 +211,8 @@ Page({
                     orderNo,
                     type: 1,
                     tp: app.globalData.tp,
-                    appid: app.globalData.id
+                    appid: app.globalData.id,
+                    notifyUrl: 'NOTIFYURL_1',
                   }, app.globalData.sessionId),
                   sessionId: app.globalData.sessionId,
                   params: {
@@ -219,7 +220,8 @@ Page({
                     orderNo,
                     type: 1,
                     tp: app.globalData.tp,
-                    appid: app.globalData.id
+                    appid: app.globalData.id,
+                    notifyUrl: 'NOTIFYURL_1',
                   }
                 }
                 http('qsq/service/external/pay/getWeChatPayInfo', params,1,1).then(res => {

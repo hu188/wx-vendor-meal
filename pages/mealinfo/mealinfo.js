@@ -229,7 +229,8 @@ Page({
           type: 1,
           tp: 0,
           appid: app.globalData.id,
-          payNotifyUrl: "1"//套餐支付
+          payNotifyUrl: "1",//套餐支付
+          notifyUrl: 'NOTIFYURL_2',
         }, app.globalData.sessionId),
         sessionId: app.globalData.sessionId,
         params: {
@@ -238,7 +239,8 @@ Page({
           type: 1,
           tp: 0,
           appid: app.globalData.id,
-          payNotifyUrl: "1"//套餐支付
+          payNotifyUrl: "1",//套餐支付
+          notifyUrl: 'NOTIFYURL_2',
         }
       }
 

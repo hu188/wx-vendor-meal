@@ -23,14 +23,14 @@
         </view>
         <radio value="{{0}}" checked="{{item.checked}}" checked='{{true}}' />
       </view>
-      <view class="payWay">
+      <!-- <view class="payWay">
         <view style='display:flex; align-items: center;'>
           <i-icon type="financial_fill" size="20" color="#80848f" />
           <text style='font-size:15px;'>余额支付</text>
           <text class="balance">(账户余额:{{price.price(balance)}})</text>
         </view>
         <radio value="{{1}}" checked="{{item.checked}}" />
-      </view>
+      </view> -->
     </radio-group>
   </view>
 

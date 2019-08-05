@@ -42,7 +42,7 @@
          <view wx:if="{{mealType==1 }}">
         <radio-group bindchange="bindPaymentChange">
           <radio value="{{0}}"  checked='{{paymentindex==0?true:false}}'/>微信支付
-          <radio value="{{1}}" />余额支付
+          <!-- <radio value="{{1}}" />余额支付 -->
           <radio value="{{2}}" checked='{{paymentindex==2?true:false}}' disabled="{{mealSurplusCount==0?true:false}}"/>套餐提货
         </radio-group>
       </view>
