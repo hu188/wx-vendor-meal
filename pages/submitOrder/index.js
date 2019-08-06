@@ -325,7 +325,8 @@ createOneRoadOrder(){
       isFirstBuy: this.data.isFirstBuy
     }
   }
-  http('qsq/service/external/order/saveOrderInfo', JSON.stringify(params), 1, 1).then(res => {
+  // qsq/service/external/order/saveOrderInfo
+  http('qsq/miniService/miniProComm/weChatCommon/saveOrderInfo', JSON.stringify(params), 1, 1).then(res => {
     this.setData({
       order: res
     })
@@ -357,11 +358,11 @@ createOneRoadOrder(){
       tp: app.globalData.tp
     }
   }
-  http('qsq/service/external/order/saveOrderInfo', JSON.stringify(params), 1, 1).then(res => {
+    http('qsq/miniService/miniProComm/weChatCommon/saveOrderInfo', JSON.stringify(params), 1, 1).then(res => {
     this.setData({
       order: res
     })
-    this.pay(res.extendMsg)
+    this.pay(res.orderNo)
   })
 },
   pay(orderNo) {
@@ -467,7 +468,7 @@ createOneRoadOrder(){
           orderNo,
           type: 1,
           tp: app.globalData.tp,
-          appid: app.globalData.id,
+          keyPoolId: app.globalData.id,
           notifyUrl: 'NOTIFYURL_1',
         }, app.globalData.sessionId),
         sessionId: app.globalData.sessionId,
@@ -476,12 +477,12 @@ createOneRoadOrder(){
           orderNo,
           type: 1,
           tp: app.globalData.tp,
-          appid: app.globalData.id,
+          keyPoolId: app.globalData.id,
           notifyUrl: 'NOTIFYURL_1',
         }
       }
-      //微信支付
-      http('qsq/service/external/pay/getWeChatPayInfo', params, 1,1).then(res => {
+      //微信支付 qsq/service/external/pay/getWeChatPayInfo
+      http('qsq/miniService/miniProComm/weChatCommon/saveCommonPay', params, 1,1).then(res => {
         wx.requestPayment({
           timeStamp: res.timeStamp + '',
           nonceStr: res.nonceStr,

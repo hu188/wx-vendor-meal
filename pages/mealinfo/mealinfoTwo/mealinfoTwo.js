@@ -207,8 +207,7 @@ Page({
           orderNo,
           type: 1,
           tp: 0,
-          appid: app.globalData.id,
-          payNotifyUrl: "1",//套餐支付
+          keyPoolId: app.globalData.id,
           notifyUrl: 'NOTIFYURL_2',
         }, app.globalData.sessionId),
         sessionId: app.globalData.sessionId,
@@ -217,14 +216,13 @@ Page({
           orderNo,
           type: 1,
           tp: 0,
-          appid: app.globalData.id,
-          payNotifyUrl: "1",//套餐支付
+          keyPoolId: app.globalData.id,
           notifyUrl: 'NOTIFYURL_2',
         }
       }
 
       //微信支付
-      http('qsq/service/external/pay/getWeChatPayInfo', params, 1,1).then(res => {
+      http('qsq/miniService/miniProComm/weChatCommon/saveCommonPay', params, 1,1).then(res => {
         wx.requestPayment({
           timeStamp: res.timeStamp + '',
           nonceStr: res.nonceStr,
