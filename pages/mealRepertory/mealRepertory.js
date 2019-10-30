@@ -162,7 +162,6 @@ Page({
                     money: 0,
                     payType: 11,
                     num: 1,
-                    nickname: app.globalData.nickname,
                     isVip: app.globalData.isVip,
                     isFirstBuy: app.globalData.isFirstBuy
                   }, app.globalData.sessionId),
@@ -175,7 +174,6 @@ Page({
                     money: 0,
                     payType: 11,
                     num: 1,
-                    nickname: app.globalData.nickname,
                     isVip: app.globalData.isVip,
                     isFirstBuy: app.globalData.isFirstBuy
                   }

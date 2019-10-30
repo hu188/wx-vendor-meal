@@ -2,36 +2,13 @@
 <view class="container container1">
   <view class="pagetop">
     <view class="userinfo">
-      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      <image wx:if="{{isVip==1}}" class="vip" src="../images/vip.jpg"></image>
-      <view a:if="{{isshowlogin==1}}">
-        <navigator class="logininfo" url='{{loginurl}}'>{{showtext}}</navigator>
-      </view>
-      <view a:else>
-        <text class="color">{{showtext}}</text>
-        <text class="exit" a:if="{{showtext}}" onTap='userexit'>{{logouttxt}}</text>
-      </view>
+      <image class="userinfo-avatar" src="{{avatarUrl}}" bindtap='toUserInfo'></image>
+      <text class="userinfo-nickname" bindtap='toUserInfo'>{{nickName}}</text>
+      <image wx:if="{{isVip==1}}" class="vip" src="../images/vip.jpg"></image> 
     </view>
-
   </view>
 
   <view class="orderinfo">
-
-    <!--修改后的我的订单 start -->
-    <!-- <view class="order-list-all">
-      <view class="myorder">
-        <view class="myordertext">
-          <image class="iconfirst" src="../images/order-icon.png"></image>
-          <view>我的订单</view>
-        </view>
-        <navigator class="myordertext" url="../order/index" open-type='switchTab'>
-          <text>全部订单</text>
-          <image class="iconsecond" src="http://mshop.yiyao365.cn/theme/default/images/wap/icon-05.png"></image>
-        </navigator>
-      </view>
-    </view> -->
-    <!--end  -->
     <view style='background:#fff;height:85px;margin-bottom:10px;'>
     <view class="order-manage">订单管理</view>
     <view class="order-type">
@@ -65,37 +42,7 @@
           <view class="divclear5"></view>
         </view>
       </navigator>
-      <navigator url="../balance/index">
-        <view class="div_div1 orderList">
-          <view class="tab_div">
-            <view class="ico1">
-              <!-- <image src="../images/honst-icon.png"></image><i-icon type="financial_fill" /> -->
-              <i-icon type="financial_fill" size="24" color="#3CB371" style='margin-right:10px;'/>
-              <view class="tab_span">我的余额</view>
-            </view>
-            <view class="ico2">
-              <image src="http://mshop.yiyao365.cn/theme/default/images/wap/icon-05.png"></image>
-            </view>
-          </view>
-          <view class="divclear5"></view>
-        </view>
-      </navigator>
-
-      <navigator url="../rechargeVip/index">
-        <view class="div_div1 orderList">
-          <view class="tab_div">
-            <view class="ico1">
-              <!-- <image src="../images/vip.jpg" class="vip"></image><i-icon type="addressbook" /> -->
-              <i-icon type="addressbook" size="24" color="#EE2C2C" style='margin-right:10px;'/>
-              <view class="tab_span">我的会员</view>
-            </view>
-            <view class="ico2">
-              <image src="http://mshop.yiyao365.cn/theme/default/images/wap/icon-05.png"></image>
-            </view>
-          </view>
-          <view class="divclear5"></view>
-        </view>
-      </navigator>
+     
 
       <button bindtap='call' class='concat'>
         <view class="div_div1 orderList">

@@ -6,21 +6,30 @@ Page({
    balance: 0
   },
   onLoad: function (e) {
-    const params = {
-      sign: encode({
-        userId: app.globalData.userId
-      }, app.globalData.sessionId),
-      sessionId: app.globalData.sessionId,
-      params: {
-        userId: app.globalData.userId
+    if (app.globalData.hasUserInfo){
+      const params = {
+        sign: encode({
+          userId: app.globalData.userId
+        }, app.globalData.sessionId),
+        sessionId: app.globalData.sessionId,
+        params: {
+          userId: app.globalData.userId
+        }
       }
-    }
-    http('qsq/service/external/recharge/queryBalance', params, 1,1).then(res => {
-      const { chargeMoney } = res
-      this.setData({
-        balance: chargeMoney/100
+      http('qsq/service/external/recharge/queryBalance', params, 1, 1).then(res => {
+        const { chargeMoney } = res
+        this.setData({
+          balance: chargeMoney / 100
+        })
+        app.globalData.balance = chargeMoney / 100
       })
-      app.globalData.balance = chargeMoney / 100
+    }
+  
+  },
+  recharge(){
+    wx.showToast({
+      title: '充值功能暂未开放！',
+      icon: 'none'
     })
   },
   onShow(){

@@ -44,9 +44,10 @@
 					"query": "deviceId=502887849"
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "ss",
 					"pathName": "pages/goods/index",
+					"query": "",
 					"scene": null
 				}
 			]

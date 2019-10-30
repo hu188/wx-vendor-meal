@@ -31,3 +31,23 @@ page{
   flex-direction: column;
   justify-content: center;
 }
+.goods-empty{
+  width: 120px;
+height: 100px;
+position: absolute;
+top: calc( 50% - 50px );
+left: calc( 50% - 60px );
+text-align: center;
+
+}
+.goods-empty-img {
+  height: 80px;
+width: 80px;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 50%;
+background: #999;
+margin: auto;
+
+}

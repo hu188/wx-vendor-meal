@@ -307,7 +307,6 @@ createOneRoadOrder(){
       money: this.data.realPrice,
       payType: this.data.payType,
       num: this.data.goodsList.length,
-      nickname: app.globalData.nickname,
       isVip: this.data.isVip,
       isFirstBuy: this.data.isFirstBuy
     }, app.globalData.sessionId),
@@ -320,7 +319,6 @@ createOneRoadOrder(){
       money:this.data.realPrice,
       payType:this.data.payType,
       num: this.data.goodsList.length,
-      nickname: app.globalData.nickname,
       isVip: this.data.isVip,
       isFirstBuy: this.data.isFirstBuy
     }
@@ -341,7 +339,6 @@ createOneRoadOrder(){
       deviceId: app.globalData.deviceId,
       userId: app.globalData.userId,
       payType: this.data.payType,
-      nickname: app.globalData.nickname,
       isVip: this.data.isVip,
       isFirstBuy: this.data.isFirstBuy,
       tp: app.globalData.tp
@@ -352,7 +349,6 @@ createOneRoadOrder(){
       deviceId: app.globalData.deviceId,
       userId: app.globalData.userId,
       payType: this.data.payType,
-      nickname: app.globalData.nickname,
       isVip: this.data.isVip,
       isFirstBuy: this.data.isFirstBuy,
       tp: app.globalData.tp

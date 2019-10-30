@@ -1,30 +1,43 @@
 <!--pages/order/pickUpRecord/index.wxml-->
+<view wx:if="{{hasUserInfo}}">
 
-<view class="body"  wx:if="{{pickUpRecordList!=''}}">
-  <scroll-view scroll-y style='height:100%'>
+  <view class="body" wx:if="{{pickUpRecordList!=''}}">
+    <scroll-view scroll-y style='height:100%'>
       <view class="item" wx:for="{{pickUpRecordList}}" wx:key='pickUpRecord'>
         <view class="od_div">
-            <view class="od_top">
-              <text>订单编号：{{item.orderNo}}</text>
-              <text>取货时间：{{item.time}}</text>
-              <text>取货商品：{{item.commodityName}}</text>
-              <text>取货数量：{{item.count}}</text>
-              <text>取货状态：{{item.operateType==7?'取货成功':'取货失败'}}</text>
-            </view>
+          <view class="od_top">
+            <text>订单编号：{{item.orderNo}}</text>
+            <text>取货时间：{{item.time}}</text>
+            <text>取货商品：{{item.commodityName}}</text>
+            <text>取货数量：{{item.count}}</text>
+            <text>取货状态：{{item.operateType==7?'取货成功':(item.operateType==6?'取货失败':'出货中')}}</text>
+            <!-- <text>取货状态：{{}}</text> -->
+          </view>
         </view>
-        
+
+      </view>
+      <view wx:if="{{end}}">
+        <i-load-more tip="数据全部加载完成" loading="{{ false }}" />
+      </view>
+    </scroll-view>
+  </view>
+  
+  <view wx:else>
+    <view class="goods-empty">
+      <view class="goods-empty-img black">
+        <image src="../../images/empty1.png" style="width:100rpx;height:100rpx;"></image>
+      </view>
+      <view style="font-size:30rpx;">您还没有取货哦</view>
     </view>
-    <view wx:if="{{end}}">
-    <i-load-more tip="数据全部加载完成" loading="{{ false }}" />
-    </view>
-  </scroll-view>
+  </view>
+
 </view>
 
-  
-
-<view wx:else style='height:100%'>
-      <view class="no-order">
-      <i-icon type="emoji" size='85'/>
-      <view>您还没有取货记录哟</view>
+<view wx:else>
+  <view class="goods-empty">
+    <view class="goods-empty-img black">
+      <image src="../../images/empty1.png" style="width:100rpx;height:100rpx;"></image>
     </view>
+    <view style="font-size:30rpx;">请先登录哦</view>
+  </view>
 </view>

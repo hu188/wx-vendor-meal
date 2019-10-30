@@ -3,6 +3,7 @@ const app = getApp();
 import common from '../../utils/common';
 import { http } from '../../utils/http';
 import { encode } from '../../utils/encode';
+const lg = app.loadUtil();
 const {
   $Toast
 } = require('../../components/base/index');
@@ -44,115 +45,14 @@ Page({
    meal为1套餐是购买次数，为0套餐是固定的商品
  */
     //BmcKLAeVhAeVhAc BmcKLBoLBoLBpBq AbVeVgVfAfVHAfVgdhViAcchVh
-    var url = 'https://www.tianrenyun.com/qsq/paomian/?sign=BmcKLBfjBhdBHd&type=2&appid=13&tp=1&meal=1'
-  // var url = 'https://www.tianrenyun.com/qsq/paomian/?sign=&type=1&appid=12&tp=&meal=1'
+    var url = 'https://www.tianrenyun.com/qsq/paomian/?sign=BbfIIBHJBdj&type=2&appid=13&tp=1&meal=1'
+   //var url = 'https://www.tianrenyun.com/qsq/paomian/?sign=&type=1&appid=12&tp=&meal=1'
 
     if (options.q) {
       url = decodeURIComponent(options.q);
     }
-    this.decodeUrl(url)
-    //判断是否授权
-    var _this = this;
-    wx.getSetting({
-      success(res) {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: resSetting => {
-              app.globalData.userInfo = resSetting.userInfo;
-              _this.setData({
-                userInfo: resSetting.userInfo,
-                hasUserInfo: true,
-                userNick: resSetting.userInfo.nickName
-              });
-              _this.login()
-            }
-          });
-        } else {
-          _this.setData({
-            hidden: true,
-            hasUserInfo: true
-          });
-        }
-      }
-    });
- 
-    
-  },
-
-  login() {
-    var _self = this;
-    wx.login({
-      scopes: 'auth_user',
-      success: (res) => {
-        wx.getUserInfo({
-          success: result => {
-            const data = {
-              "code": res.code,
-              "keyPoolId": app.globalData.id, //小程序id
-            }
-            let { encryptedData, iv } = result
-
-            http('qsq/miniService/miniProComm/weChatCommon/commonLogin', JSON.stringify(data), 1, 1).then(lres => {
-              const { isVip, id, firstBuy, chargeMoney, optFlag } = lres
-
-              app.globalData.userId = id
-              app.globalData.isVip = optFlag=="0"?"0":isVip
-              app.globalData.sessionId = lres.sessionId;
-              app.globalData.balance = optFlag == "0" ? 0:chargeMoney/100
-      
-              app.globalData.nickname = this.data.userNick
-              const { levelTypeId, type } = lres;
-              app.globalData.type = { level: levelTypeId, type }
-                 _self.setData({
-                   isVip: app.globalData.isVip,
-                 })
-              var buyDate = new Date(firstBuy)
-              var now = new Date()
-              if (buyDate.toLocaleDateString() != now.toLocaleDateString()) {
-                app.globalData.isFirstBuy = 1
-                _self.setData({
-                  isFirstBuy: app.globalData.isFirstBuy,
-                })
-              }
-              // wx.clearStorageSync()
-  
-              const params = {
-                sign: encode({
-                  openid: lres.openid,
-                  encryptedData: encryptedData,
-                  iv: iv
-                }, lres.sessionId),
-                sessionId: lres.sessionId,
-                params: {
-                  openid: lres.openid,
-                  encryptedData: encryptedData,
-                  iv: iv
-                }
-              }
-              http('qsq/miniService/miniProComm/weChatCommon/saveAnalysisData', JSON.stringify(params), 1, 1).then(sres => {
-             //根据设备名查找设备
-              this.queryDevice(this.data.sign);
-              this.queryMealUseNum();
-              })
-  
-            })
-          }
-        })
-      }
-    })
-  },
-  getUserInfo: function (e) {
-    app.globalData.userInfo = e.detail.userInfo
-    const { errMsg } = e.detail
-    if (errMsg === 'getUserInfo:ok') {
-    this.setData({
-      hidden: false,
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true,
-      userNick: e.detail.userInfo.nickName
-    });
-    }
-    this.login();
+    this.decodeUrl(url);
+    lg.authLoad(this);
   },
 
   //二维码扫描
@@ -363,6 +263,7 @@ Page({
   },
   //去结算
   submitHandler() {
+    if (getApp().globalData.hasUserInfo) {
     const { count } = this.data
     if (count>0) {
       getApp().globalData.goodsList = this.data.selectGoods
@@ -374,6 +275,19 @@ Page({
         content: '请选择商品！',
         type: 'error'
       });
+    }
+    }else{
+      wx.showModal({
+        title: '温馨提示',
+        content: '购买商品需要先登录，您确定去登陆吗？',
+        success(res) {
+          if (res.confirm) {
+            wx.switchTab({
+              url: '/pages/mycenter/index'
+            })
+          }
+        }
+      })
     }
   },
   noChangeNumber(){

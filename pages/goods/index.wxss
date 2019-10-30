@@ -4,9 +4,24 @@
     overflow: hidden;
     background-color: #fff;
 }
-.tssm{
+.scan-sm{
+  width: 360rpx;
+  height: 360rpx;
+  /* border: 1px #000 solid; */
+  border-radius: 50%;
   display: flex;
+  align-items: center;
   flex-direction: column;
+  justify-content: center;
+  box-shadow: 0rpx 0rpx 20rpx 10rpx #f2f2f5;
+
+}
+.scan{
+ height: 100vh;
+ width: 100vw;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
   align-items: center;
 }
 .p{
@@ -243,6 +258,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-top: 30rpx;
 }
 .vipPrice {
     color: red;

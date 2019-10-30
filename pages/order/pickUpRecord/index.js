@@ -12,13 +12,18 @@ Page({
     c_page:1,//当前页
     pageCount:1,
     end:false,//判断是否到底
+    hasUserInfo: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.queryPickUpRecord()
+    let that = this;
+    that.setData({
+      hasUserInfo: app.globalData.hasUserInfo
+    })
+    that.queryPickUpRecord()
   },
 
 
@@ -30,39 +35,42 @@ Page({
  
   },
   queryPickUpRecord(){
-    let that = this;
-  
-    const params = {
-      sign: encode({
-        userId: app.globalData.userId,
-        page: that.data.c_page,
-        pageSize: 20
-      }, app.globalData.sessionId),
-      sessionId: app.globalData.sessionId,
-      params: {
-        userId: app.globalData.userId,
-        page: that.data.c_page,
-        pageSize:20
-      }
-    }
-    //获取取货记录
-    http('qsq/service/external/order/queryPickUpRecord', params, 1,1).then(res => {
-      if (res) {
-        let queryPickUpRecord = res.queryPickUpRecord;
-        for (var i = 0; i < queryPickUpRecord.length; i++) {
-          queryPickUpRecord[i].time = that.formatDateTime(queryPickUpRecord[i].createTime)
+    if (app.globalData.hasUserInfo){
+      let that = this;
+
+      const params = {
+        sign: encode({
+          userId: app.globalData.userId,
+          page: that.data.c_page,
+          pageSize: 20
+        }, app.globalData.sessionId),
+        sessionId: app.globalData.sessionId,
+        params: {
+          userId: app.globalData.userId,
+          page: that.data.c_page,
+          pageSize: 20
         }
-        var arr1 = that.data.pickUpRecordList; //从data获取当前pickUpRecordList数组
-        var arr2 = res.queryPickUpRecord; //从此次请求返回的数据中获取新数组
-        arr1 = arr1.concat(arr2); //合并数组
-        //pickUpRecordList = pickUpRecordList.concat(res.queryPickUpRecord)
-        that.setData({
-          pickUpRecordList: arr1,
-          pageCount: res.pageCount
-        })
       }
-      
-    })
+      //获取取货记录
+      http('qsq/service/external/order/queryPickUpRecord', params, 1, 1).then(res => {
+        if (res) {
+          let queryPickUpRecord = res.queryPickUpRecord;
+          for (var i = 0; i < queryPickUpRecord.length; i++) {
+            queryPickUpRecord[i].time = that.formatDateTime(queryPickUpRecord[i].createTime)
+          }
+          var arr1 = that.data.pickUpRecordList; //从data获取当前pickUpRecordList数组
+          var arr2 = res.queryPickUpRecord; //从此次请求返回的数据中获取新数组
+          arr1 = arr1.concat(arr2); //合并数组
+          //pickUpRecordList = pickUpRecordList.concat(res.queryPickUpRecord)
+          that.setData({
+            pickUpRecordList: arr1,
+            pageCount: res.pageCount
+          })
+        }
+
+      })
+    }
+   
   },
   //格式化时间
   formatDateTime: function (inputTime) {

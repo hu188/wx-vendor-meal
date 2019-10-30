@@ -43,45 +43,14 @@ App({
   reLogin() {
     var that = this
     setTimeout(function () {
-      wx.login({
-        scopes: 'auth_user',
-        success: (res) => {
-          wx.getUserInfo({
-            success: result => {
-              const data = {
-                "code": res.code,
-                "keyPoolId": that.globalData.id, //小程序id
-              }
-              let { encryptedData, iv } = result
-
-              http('qsq/miniService/miniProComm/weChatCommon/commonLogin', JSON.stringify(data), 1, 1).then(lres => {
-
-                that.globalData.sessionId = lres.sessionId;
-                const params = {
-                  sign: encode({
-                    openid: lres.openid,
-                    encryptedData: encryptedData,
-                    iv: iv
-                  }, lres.sessionId),
-                  sessionId: lres.sessionId,
-                  params: {
-                    openid: lres.openid,
-                    encryptedData: encryptedData,
-                    iv: iv
-                  }
-                }
-                http('qsq/miniService/miniProComm/weChatCommon/saveAnalysisData', JSON.stringify(params), 1, 1).then(sres => {
-
-                })
-
-              })
-            }
-          })
-        }
+      http('qsq/miniService/miniProComm/weChatCommon/saveSecretKey', {
+        keyPoolId: getApp().globalData.id
+      }, 1, 1).then(res => {
+        that.globalData.sessionId = res.sessionId
       })
       that.reLogin()
     }, 3600000) //延迟时间 一小时3600000
-  },
+  }, 
   globalData: {
     userInfo: null,
     user_id: '',//支付宝userid
@@ -107,7 +76,15 @@ App({
     tp: '',//0单货单，1多货道
     nickname:'',
     sessionId:'',
+    oneLoad: true,
+    hasUserInfo: false,//是否授权
     allGoodList: [],//设备上所有商品
     mealType:'',//套餐类型
   },
+  /**
+* 加载登录工具包
+*/
+  loadUtil: function () {
+    return require('utils/login.js');
+  }
 });

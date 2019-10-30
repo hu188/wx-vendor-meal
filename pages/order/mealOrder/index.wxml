@@ -1,26 +1,38 @@
 <!--pages/order/mealOrder/index.wxml-->
 <wxs module="price" src="../../../utils/common.wxs" />
+<view wx:if="{{hasUserInfo}}">
 <view class="body" wx:if="{{mealOrder!=''}}">
   <scroll-view scroll-y style='height:100%'>
-      <view class="item" wx:for="{{mealOrder}}" wx:key='mealOrder'>
-        <view class="od_div">
-            <view class="od_top">
-              <text>订单编号：{{item.orderNo}}</text>
-              <text>购买时间：{{item.time}}</text>
-              <text>套餐名称：【{{item.mealName}}】</text>
-              <!-- <text>套餐内容：{{item.content}}x{{item.goodNum}}份</text> -->
-              <text>支付金额：{{item.money}}</text>
-            </view>
+    <view class="item" wx:for="{{mealOrder}}" wx:key='mealOrder'>
+      <view class="od_div">
+        <view class="od_top">
+          <text>订单编号：{{item.orderNo}}</text>
+          <text>购买时间：{{item.time}}</text>
+          <text>套餐名称：【{{item.mealName}}】</text>
+          <!-- <text>套餐内容：{{item.content}}x{{item.goodNum}}份</text> -->
+          <text>支付金额：{{item.money}}</text>
         </view>
+      </view>
     </view>
     <view wx:if="{{end}}">
-    <i-load-more tip="数据全部加载完成" loading="{{ false }}" />
+      <i-load-more tip="数据全部加载完成" loading="{{ false }}" />
     </view>
   </scroll-view>
 </view>
-<view wx:else style='height:100%'>
-      <view class="no-order">
-      <i-icon type="emoji" size='85'/>
-      <view>您还没有购买套餐哟</view>
+<view wx:else >
+  <view class="goods-empty">
+    <view class="goods-empty-img black">
+      <image src="../../images/empty1.png" style="width:100rpx;height:100rpx;"></image>
     </view>
+    <view style="font-size:30rpx;">没有已购套餐哦</view>
+  </view>
+</view>
+</view>
+<view wx:else>
+  <view class="goods-empty">
+    <view class="goods-empty-img black">
+      <image src="../../images/empty1.png" style="width:100rpx;height:100rpx;"></image>
+    </view>
+    <view style="font-size:30rpx;">请先登录哦</view>
+  </view>
 </view>

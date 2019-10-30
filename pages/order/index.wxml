@@ -9,6 +9,7 @@
   </view>
   <scroll-view scroll-y>
     <view class="list">
+    <view wx:if="{{orderlist.length>0}}">
       <view class="item" wx:for="{{orderlist}}" wx:key='order'>
         <view class="od_div">
           <!-- <view wx:if="{{item.extendMsg}}"> -->
@@ -38,7 +39,25 @@
           </view>
         </view>
       </view>
+      </view>
+        <view wx:elif="{{!hasUserInfo}}">
+        <view class="goods-empty">
+          <view class="goods-empty-img black">
+            <image src="../images/empty1.png" style="width:100rpx;height:100rpx;"></image>
+          </view>
+          <view>请先登录哦</view>
+        </view>
+      </view>
+      <view wx:else>
+        <view class="goods-empty">
+          <view class="goods-empty-img black">
+            <image src="../images/empty1.png" style="width:100rpx;height:100rpx;"></image>
+          </view>
+          <view>没有已购商品哦</view>
+        </view>
+      </view>
     </view>
+
   </scroll-view>
 </view>
 

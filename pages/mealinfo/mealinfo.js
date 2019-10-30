@@ -107,7 +107,6 @@ Page({
           money: mealPrice,
           payType: payWay == 0 ? 7 : 8,
           num: 1,
-          nickname: nickname,
           type: type.type,
           levelTypeId: type.level,
           times: mealInfo.commodityNumber
@@ -122,7 +121,6 @@ Page({
           money: mealPrice,
           payType: payWay == 0 ? 7 : 8,
           num: 1,
-          nickname: nickname,
           type: type.type,
           levelTypeId: type.level,
           times: mealInfo.commodityNumber
@@ -140,7 +138,6 @@ Page({
           money: mealPrice,
           payType: payWay == 0 ? 7 : 8,
           num: 1,
-          nickname: nickname,
           type: type.type,
           levelTypeId: type.level,
           times: mealInfo.commodityNumber
@@ -156,7 +153,6 @@ Page({
           money: mealPrice,
           payType: payWay == 0 ? 7 : 8,
           num: 1,
-          nickname: nickname,
           type: type.type,
           levelTypeId: type.level,
           times: mealInfo.commodityNumber

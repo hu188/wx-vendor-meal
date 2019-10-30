@@ -13,6 +13,7 @@ Page({
     mealType:'',
     mealUseNum:0,//套餐剩余使用次数
     tp:'',//单货道还是多货道
+    hasUserInfo:'',//是否授权
   },
 
   /**
@@ -113,18 +114,24 @@ Page({
    */
   onShow: function () {
     this.setData({
-      mealType:app.globalData.mealType
+      mealType:app.globalData.mealType,
+      hasUserInfo:app.globalData.hasUserInfo
     })
-    if (this.data.mealType==0){
-      this.queryGoodsMeals()
-    } else if (this.data.mealType == 1 ){
-      this.queryMealUseNum()
-      this.queryMeals()
+    if (app.globalData.hasUserInfo){
+      if (this.data.mealType == 0) {
+        this.queryGoodsMeals()
+      } else if (this.data.mealType == 1) {
+        this.queryMealUseNum()
+        this.queryMeals()
+      }
     }
-    
   },
 
-
+  toLogin(){
+    wx.switchTab({
+      url: '/pages/mycenter/index'
+    })
+  }
 
  
 })

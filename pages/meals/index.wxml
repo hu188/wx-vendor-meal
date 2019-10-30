@@ -2,57 +2,67 @@
 <!-- <block wx:if="{{groupArr.length > 0}}"> -->
 <wxs module="price" src="../../utils/common.wxs" />
 <wxs module="utils" src="../../utils/index.wxs" />
-<view wx:if="{{mealType==0}}">
-  <block>
+<view wx:if="{{hasUserInfo}}">
+  <view wx:if="{{mealType==0}}">
+    <block>
+      <scroll-view class='page-core' scroll-y="true">
+        <view class='page-item' wx:for="{{mealsList}}" bindtap='toMealInfo' wx:key="mealsList" data-id='{{index}}'>
+          <image src="{{utils.convertImagePath('tc'+item.id)}}">
+          </image>
+          <view class='group-title'>{{item.mealName}}</view>
+          <view class='group-other'>
+            <view class='group-price'>
+              <text class="practical-price">￥{{price.price(item.mealPrice/100)}}</text>
+              <text class="original-price">￥{{price.price(item.mealPrice/100)}}</text>
+            </view>
+            <view class='group-opt'>
+              详情
+            </view>
+          </view>
+          <view class="group-usernum">
+            {{item.commodityTypeName}}
+          </view>
+        </view>
+      </scroll-view>
+    </block>
+    <!-- <block wx:else> -->
+    <block>
+      <empty id='empty' tips='空' theme='gray' />
+    </block>
+  </view>
+  <view wx:elif="{{mealType==1 && tp==0}}">
+    <view wx:if="{{mealUseNum>0}}">
+      <i-notice-bar icon="systemprompt" loop speed="2000">
+        我的套餐剩余使用次数：{{mealUseNum}}次。客服热线：4000009443
+      </i-notice-bar>
+    </view>
+    <view wx:else>
+      <i-notice-bar icon="systemprompt" loop speed="2000">
+        您没有可使用的套餐，请先购买！客服热线：4000009443
+      </i-notice-bar>
+    </view>
     <scroll-view class='page-core' scroll-y="true">
-      <view class='page-item' wx:for="{{mealsList}}" bindtap='toMealInfo' wx:key="mealsList" data-id='{{index}}'>
-        <image src="{{utils.convertImagePath('tc'+item.id)}}">
-        </image>
-        <view class='group-title'>{{item.mealName}}</view>
-        <view class='group-other'>
-          <view class='group-price'>
-            <text class="practical-price">￥{{price.price(item.mealPrice/100)}}</text>
-            <text class="original-price">￥{{price.price(item.mealPrice/100)}}</text>
-          </view>
-          <view class='group-opt'>
-            详情
-          </view>
+
+      <view class="i-card" wx:for="{{mealsCountList}}" wx:key="mealsCountList" data-index='{{index}}' bindtap='toBuy'>
+        <view class="i-card-header">
+          <image class="i-card-img" src="../images/fruits.jpg" mode="aspectFit" />
+          <view style='color:#B63B41;font-weight:600;font-size:18px;'>￥{{price.price(item.money)}}元</view>
+          <button class="i-card-buy">购买</button>
         </view>
-        <view class="group-usernum">
-          {{item.commodityTypeName}}
-        </view>
+        <view class="i-card-body">{{item.rechargeName}}</view>
+        <view class="i-card-footer">{{item.extendMsg}}</view>
       </view>
     </scroll-view>
-  </block>
-  <!-- <block wx:else> -->
-  <block>
-    <empty id='empty' tips='空' theme='gray' />
-  </block>
+  </view>
 </view>
-<view wx:elif="{{mealType==1 && tp==0}}">
-  <view wx:if="{{mealUseNum>0}}">
-    <i-notice-bar icon="systemprompt" loop speed="2000">
-      我的套餐剩余使用次数：{{mealUseNum}}次。客服热线：4000009443
-    </i-notice-bar>
-  </view>
-  <view wx:else>
-    <i-notice-bar icon="systemprompt" loop speed="2000">
-      您没有可使用的套餐，请先购买！客服热线：4000009443
-    </i-notice-bar>
-  </view>
-  <scroll-view class='page-core' scroll-y="true">
-
-    <view class="i-card" wx:for="{{mealsCountList}}" wx:key="mealsCountList" data-index='{{index}}' bindtap='toBuy'>
-      <view class="i-card-header">
-        <image class="i-card-img" src="../images/fruits.jpg" mode="aspectFit" />
-        <view style='color:#B63B41;font-weight:600;font-size:18px;'>￥{{price.price(item.money)}}元</view>
-        <button class="i-card-buy">购买</button>
-      </view>
-      <view class="i-card-body">{{item.rechargeName}}</view>
-      <view class="i-card-footer">{{item.extendMsg}}</view>
+<view wx:else>
+  <view class="goods-empty"  bindtap="toLogin">
+    <view class="goods-empty-img black">
+      <image src="../images/empty1.png" style="width:100rpx;height:100rpx;"></image>
     </view>
-  </scroll-view>
-</view>
+    <view style="font-size:30rpx;">请先登录哦</view>
+  </view>
 
+</view>
 <i-tab current='meals'></i-tab>
 <i-toast id="toast" />
