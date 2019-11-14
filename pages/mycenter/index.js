@@ -51,4 +51,10 @@ Page({
       phoneNumber: '4000009443' 
     })
   },
+  binderror(e){
+    console.log(e)
+  },
+  bindload(e){
+    console.log(e)
+  }
 });

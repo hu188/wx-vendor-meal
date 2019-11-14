@@ -4,27 +4,27 @@
     <view class="userinfo">
       <image class="userinfo-avatar" src="{{avatarUrl}}" bindtap='toUserInfo'></image>
       <text class="userinfo-nickname" bindtap='toUserInfo'>{{nickName}}</text>
-      <image wx:if="{{isVip==1}}" class="vip" src="../images/vip.jpg"></image> 
+      <image wx:if="{{isVip==1}}" class="vip" src="../images/vip.jpg"></image>
     </view>
   </view>
 
   <view class="orderinfo">
     <view style='background:#fff;height:85px;margin-bottom:10px;'>
-    <view class="order-manage">订单管理</view>
-    <view class="order-type">
-      <view class="order" bindtap='toGoodOrder'> 
-      <i-icon type="document" size="24" color="#FFAF25" style='margin-right:10px;'/>商品订单
+      <view class="order-manage">订单管理</view>
+      <view class="order-type">
+        <view class="order" bindtap='toGoodOrder'>
+          <i-icon type="document" size="24" color="#FFAF25" style='margin-right:10px;' />商品订单
+        </view>
+        <view class="line"></view>
+        <view class="order" bindtap='toMealOrder'>
+          <i-icon type="task" size="24" color="#FFAF25" style='margin-right:10px;' />套餐订单
+        </view>
+        <view class="line"></view>
+
+        <view class="order" bindtap='toPickUpOrder'>
+          <i-icon type="publishgoods_fill" size="24" color="#FFAF25" style='margin-right:10px;' />取货记录
+        </view>
       </view>
-      <view class="line"></view>
-      <view class="order"  bindtap='toMealOrder'>
-      <i-icon type="task" size="24" color="#FFAF25" style='margin-right:10px;'/>套餐订单
-      </view>
-      <view class="line"></view>
-  
-      <view class="order"  bindtap='toPickUpOrder'>
-      <i-icon type="publishgoods_fill" size="24" color="#FFAF25" style='margin-right:10px;'/>取货记录
-      </view>
-    </view>
     </view>
     <view class="order-list-all">
       <navigator url="../coupon/index">
@@ -32,7 +32,7 @@
           <view class="tab_div">
             <view class="ico1">
               <!-- <image src="../images/yhq.png"></image> -->
-              <i-icon type="coupons" size="24" color="#FFAF25" style='margin-right:10px;'/>
+              <i-icon type="coupons" size="24" color="#FFAF25" style='margin-right:10px;' />
               <view class="tab_span">我的优惠券</view>
             </view>
             <view class="ico2">
@@ -42,18 +42,18 @@
           <view class="divclear5"></view>
         </view>
       </navigator>
-     
+
 
       <button bindtap='call' class='concat'>
         <view class="div_div1 orderList">
           <view class="tab_div">
             <view class="ico1">
               <!-- <image src="../images/xun1-active.png"></image> <i-icon type="customerservice" />-->
-              <i-icon type="customerservice" size="24" color="#63B8FF" style='margin-right:10px;'/>
+              <i-icon type="customerservice" size="24" color="#63B8FF" style='margin-right:10px;' />
               <view class="tab_span">客服热线</view>
             </view>
             <view class="ico2">
-            <view class="tab_span"> 4000009443</view>
+              <view class="tab_span"> 4000009443</view>
             </view>
           </view>
           <view class="divclear5"></view>
@@ -61,6 +61,10 @@
       </button>
     </view>
   </view>
+
+    <!-- <official-account style="border:1rpx solid black;" bindload="bindload" binderror="binderror"></official-account> -->
+
+
   <view class="footer">
     <view>天任提供技术支持</view>
   </view>

@@ -209,7 +209,7 @@
     overflow: hidden;
 }
 
-.colsview {
+/* .colsview {
     display: flex;
     align-items: center;
     padding: 10rpx;
@@ -226,7 +226,28 @@
     justify-content: flex-start;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-around; */
+} 
+*/
+.colsview {
+    display: flex;
+    align-items: center;
+    padding: 10rpx;
+}
+.colsview > image{
+    width: 10vh;
+    height: 10vh;
+   margin-right: 10rpx;
+   border-radius: 5rpx;
+}
+
+.goods {
+    padding: 10rpx;
+    flex:1;
+    height: 10vh;
+    /* justify-content: flex-start;  
+    display: flex;
+    flex-direction: column; */
+    /* justify-content: space-around;*/
 }
 .counter{
     height: 10vh;
