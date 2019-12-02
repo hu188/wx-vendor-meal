@@ -62,7 +62,7 @@
     </view>
   </view>
 
-    <!-- <official-account style="border:1rpx solid black;" bindload="bindload" binderror="binderror"></official-account> -->
+    <official-account  bindload="bindload" binderror="binderror"></official-account>
 
 
   <view class="footer">

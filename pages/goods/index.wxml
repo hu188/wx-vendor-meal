@@ -2,12 +2,12 @@
 <wxs module="price" src="../../utils/common.wxs" />
 
 <view class="container container1">
-<view wx:if="{{mealUseNum>0}}">
-<i-notice-bar icon="systemprompt" loop speed="2000">
+  <view wx:if="{{mealUseNum>0}}">
+    <i-notice-bar icon="systemprompt" loop speed="2000">
       我的套餐剩余使用次数：{{mealUseNum}}次，每天可以提取两个商品。客服热线：4000009443
-</i-notice-bar>
-</view>
- <view wx:else>
+    </i-notice-bar>
+  </view>
+  <view wx:else>
     <i-notice-bar icon="systemprompt" loop speed="2000">
       温馨提示：您可以购买优惠套餐，每日可以提取两个商品。客服热线：4000009443
     </i-notice-bar>
@@ -28,56 +28,50 @@
     </scroll-view>
 
     <scroll-view scroll-y="false" class="sub-right">
-      <view wx:if="{{list.length>0}}" class="sub-lists">
-        <view wx:for="{{list}}" wx:key='index' style='display:flex;flex-direction:column; border-bottom: 2rpx solid rgba(125, 125, 125, .2);margin-bottom: 10rpx;'>
+      <view wx:if="{{list.length>0}}" >
+        <view wx:for="{{list}}" wx:key='index' style='border-bottom: 2rpx solid rgba(125, 125, 125, .2);'>
           <view class="colsview">
-            <image wx:if="{{item.picture}}" src="{{utils.convertImagePath(item.picture)}}" data-id="{{item.id}}"></image>
-            <image wx:else src="../images/none.png"></image>
+            <image wx:if="{{item.picture}}" src="{{utils.convertImagePath(item.picture)}}" data-id="{{item.id}}" class="good-image"></image>
+            <image wx:else src="../images/none.png" class="good-image"></image>
             <view data-id="{{item.id}}" class="goods">
+              <!-- 商品名称 -->
               <view class="hdsp">
                 <text class="{{item.s?'hdcss':''}}">{{item.s?'货道:'+item.s:''}}</text>
-                <text >{{item.commodityName}}</text>
+                <text>{{item.commodityName}}</text>
               </view>
-              <view wx:if="{{isVip == 1 && isFirstBuy==1}}">
-                <!-- <view class="coltex vipPrice">会员价：￥{{price.price(item.costPrice)}}</view> -->
-                <view class="coltex price">
-                  <text style='text-decoration:line-through;color:#000;margin-left:0px;'>原价：￥{{price.price(item.retailPrice)}}</text>
+              <!-- 商品价格 -->
+              <view class="good-price">
+                <view class="coltex price">售价：￥{{price.price(item.retailPrice)}} </view>
+             
+              <!-- 选择数量 -->
+              <view>
+                <view wx:if="{{item.status}}">
+                  <input-number wx:if="{{item.status==1}}" value="{{item.count ||0}}" min="0" max="1" step="1" bindchange="{{count<1 || item.count==1?'changeNumber':'noChangeNumber'}}" data-index='{{index}}' data-item='{{utils.getCoupon(item.good)}}' />
+                  <input-number wx:else value="{{item.count ||0}}" min="0" max="0" step="1" bindchange="noGoods" data-index='{{index}}' data-item='{{utils.getCoupon(item.good)}}' />
                 </view>
-              </view>
-              <view wx:else>
-                <view class="coltex price">购买价：￥{{price.price(item.retailPrice)}} </view>
-                <!-- <view class="coltex vipPrice">
-                  <text style='text-decoration:color:#000;margin-left:0px;'>会员价：￥{{price.price(item.costPrice)}}  </text>
-                </view> -->
-              </view>
-
-              <!-- <text class="discount" wx:if='{{item.discount && item.discount>0}}'>已优惠:{{price.price(item.discount)}}</text> -->
-            </view>
-            <view class="counter">
-              <view wx:if="{{item.status}}">
-                <input-number wx:if="{{item.status==1}}" value="{{item.count ||0}}" min="0" max="1" step="1" bindchange="{{count<1 || item.count==1?'changeNumber':'noChangeNumber'}}" data-index='{{index}}' data-item='{{utils.getCoupon(item.good)}}' />
-                <input-number wx:else value="{{item.count ||0}}" min="0" max="0" step="1" bindchange="noGoods" data-index='{{index}}' data-item='{{utils.getCoupon(item.good)}}' />
-              </view>
-              <view wx:elif="{{item.valid && item.valid==1}}">
-                <!--有效值为1时不可购买-->
-                <input-number value="{{item.count ||0}}" min="0" max="0" step="1" bindchange="fault" data-index='{{index}}' data-item='{{utils.getCoupon(item.good)}}' />
-              </view>
-              <view wx:else>
-                <view wx:if="{{item.num>0 && tp==1 && isVip == 1 && isFirstBuy==1 }}">
-                  <input-number value="{{item.count ||0}}" min="0" max="1" step="1" bindchange="{{count<1 || item.count==1?'changeNumber':'noChangeNumber'}}" data-index='{{index}}' data-item='{{utils.getCoupon(item.good)}}' />
-                </view>
-                <view wx:elif="{{item.num>0 && tp==1}}">
-                  <input-number value="{{item.count ||0}}" min="0" max="{{item.num}}" step="1" bindchange="changeNumber" data-index='{{index}}' data-item='{{utils.getCoupon(item.good)}}' />
-                </view>
-                <view wx:elif="{{item.num>0 }}">
-                  <input-number value="{{item.count ||0}}" min="0" max="1" step="1" bindchange="{{count<1 || item.count==1?'changeNumber':'noChangeNumber'}}" data-index='{{index}}' data-item='{{utils.getCoupon(item.good)}}' />
+                <view wx:elif="{{item.valid && item.valid==1}}">
+                  <!--有效值为1时不可购买-->
+                  <input-number value="{{item.count ||0}}" min="0" max="0" step="1" bindchange="fault" data-index='{{index}}' data-item='{{utils.getCoupon(item.good)}}' />
                 </view>
                 <view wx:else>
-                  <input-number value="{{item.count ||0}}" min="0" max="0" step="1" bindchange="noGoods" data-index='{{index}}' data-item='{{utils.getCoupon(item.good)}}' />
+                  <view wx:if="{{item.num>0 && tp==1 && isVip == 1 && isFirstBuy==1 }}">
+                    <input-number value="{{item.count ||0}}" min="0" max="1" step="1" bindchange="{{count<1 || item.count==1?'changeNumber':'noChangeNumber'}}" data-index='{{index}}' data-item='{{utils.getCoupon(item.good)}}' />
+                  </view>
+                  <view wx:elif="{{item.num>0 && tp==1}}">
+                    <input-number value="{{item.count ||0}}" min="0" max="{{item.num}}" step="1" bindchange="changeNumber" data-index='{{index}}' data-item='{{utils.getCoupon(item.good)}}' />
+                  </view>
+                  <view wx:elif="{{item.num>0 }}">
+                    <input-number value="{{item.count ||0}}" min="0" max="1" step="1" bindchange="{{count<1 || item.count==1?'changeNumber':'noChangeNumber'}}" data-index='{{index}}' data-item='{{utils.getCoupon(item.good)}}' />
+                  </view>
+                  <view wx:else>
+                    <input-number value="{{item.count ||0}}" min="0" max="0" step="1" bindchange="noGoods" data-index='{{index}}' data-item='{{utils.getCoupon(item.good)}}' />
+                  </view>
                 </view>
-              </view>
 
+              </view>
+               </view>
             </view>
+
           </view>
           <text class="discount">{{utils.getCoupon(item.good).couponName}}</text>
         </view>
@@ -88,7 +82,7 @@
     </scroll-view>
   </view>
   <view wx:else class="scan">
-     <view class="scan-sm" bindtap="click">
+    <view class="scan-sm" bindtap="click">
       <view style="font-size:34rpx;color:#777;font-weight:600">扫描设备的二维码</view>
       <image src='../images/scancode.png' style="width:160rpx;height:160rpx;"></image>
     </view>
@@ -106,7 +100,8 @@
   <view style='background:#F0F0F0;height:30px'>
     <label class='label-cart-bar'>
       <label style='padding:5px'>已选商品</label>
-      <label style='padding:5px' bindtap='clearCartList'><i-icon type="trash" size="20"/>清空购物车</label>
+      <label style='padding:5px' bindtap='clearCartList'>
+        <i-icon type="trash" size="20" />清空购物车</label>
     </label>
 
   </view>
@@ -119,15 +114,15 @@
         <view style='display:flex;  align-items: center; justify-content: space-between;'>
           <label class='activity-color'>¥ {{item.retailPrice}} x {{item.count}}</label>
           <!-- <input-number value="{{item.count ||0}}" min="0" max="{{item.num}}" step="1" bindchange="addNumber" data-index='{{index}}'  /> -->
-               <view wx:if="{{item.num>0 && tp==1 && isVip == 1 && isFirstBuy==1 }}">
-                  <input-number value="{{item.count ||0}}" min="0" max="1" step="1" bindchange="{{count<1 || item.count==1?'addNumber':'noChangeNumber'}}" data-index='{{index}}'  />
-                </view>
-                <view wx:elif="{{item.num>0 && tp==1}}">
-                  <input-number value="{{item.count ||0}}" min="0" max="{{item.num}}" step="1" bindchange="addNumber" data-index='{{index}}' />
-                </view>
-                <view wx:elif="{{item.num>0 }}">
-                  <input-number value="{{item.count ||0}}" min="0" max="1" step="1" bindchange="{{count<1 || item.count==1?'addNumber':'noChangeNumber'}}" data-index='{{index}}'  />
-                </view>
+          <view wx:if="{{item.num>0 && tp==1 && isVip == 1 && isFirstBuy==1 }}">
+            <input-number value="{{item.count ||0}}" min="0" max="1" step="1" bindchange="{{count<1 || item.count==1?'addNumber':'noChangeNumber'}}" data-index='{{index}}' />
+          </view>
+          <view wx:elif="{{item.num>0 && tp==1}}">
+            <input-number value="{{item.count ||0}}" min="0" max="{{item.num}}" step="1" bindchange="addNumber" data-index='{{index}}' />
+          </view>
+          <view wx:elif="{{item.num>0 }}">
+            <input-number value="{{item.count ||0}}" min="0" max="1" step="1" bindchange="{{count<1 || item.count==1?'addNumber':'noChangeNumber'}}" data-index='{{index}}' />
+          </view>
         </view>
       </view>
     </view>

@@ -45,8 +45,8 @@ Page({
    meal为1套餐是购买次数，为0套餐是固定的商品
  */
     //BmcKLAeVhAeVhAc BmcKLBoLBoLBpBq AbVeVgVfAfVHAfVgdhViAcchVh
-    var url = 'https://www.tianrenyun.com/qsq/gzg/?sign=AbVeVHViAaVdAfVgcfVHAccdVf&type=1&appid=12&tp=1&mealType=1'
-  // var url = 'https://www.tianrenyun.com/qsq/paomian/?sign=&type=1&appid=12&tp=&meal=1'
+    //var url = 'https://www.tianrenyun.com/qsq/gzg/?sign=AbVeVgVfAfVHAfVgdhViAcchVh&type=1&appid=12&tp=1&mealType=1'
+    var url = 'https://www.tianrenyun.com/qsq/paomian/?sign=&type=1&appid=43&tp=&meal=1'
 
     if (options.q) {
       url = decodeURIComponent(options.q);
